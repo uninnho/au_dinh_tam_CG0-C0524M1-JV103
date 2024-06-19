@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="output"></h1>
+<form>
+  <button type="button" onclick="repeat1()" value="1" id="button1">1</button>
+  <button type="button" onclick="repeat2()" value="1" id="button2">+</button>
+</form>
+<script>
+   function repeat1()
+   {
+       let a = document.getElementById("output").innerHTML;
+       document.getElementById("output").innerText = a + document.getElementById("button1").value;
+   }
+   function repeat2()
+   {
+       document.getElementById("output").innerHTML = "";
+       document.getElementById("output").innerText = +document.getElementById("output").innerHTML;
+   }
+</script>
+</body>
+</html>

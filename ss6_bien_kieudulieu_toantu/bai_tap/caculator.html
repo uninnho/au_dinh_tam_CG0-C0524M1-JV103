@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+<table>
+    <tr>
+        <td>
+            <input id="sothunhat" type="text">
+        </td>
+        <td>
+            <input id="sothuhai" type="text">
+        </td>
+<!--        <td>-->
+<!--            <p1 id="result">Kết quả: </p1>-->
+<!--        </td>-->
+    </tr>
+<!--&lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+
+<!--            <button type="button" onclick="Addition">Addition(+)</button>-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+<!--            <button type="button" onclick="Subtraction">Subtraction(-)</button>-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+<!--            <button type="button" onclick="Multiplication">Multiplication(*)</button>-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+<!--            <button type="button" onclick="Division">Division(/)</button>-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+</table>
+<span>
+    <button type="button" onclick="Addition()">Addition(+)</button>
+    <button type="button" onclick="Subtraction()">Subtraction(-)</button>
+    <button type="button" onclick="Multiplication()">Multiplication(*)</button>
+    <button type="button" onclick="Division()">Division(/)</button>
+</span>
+<h1 id = "result"></h1>
+</form>
+<script>
+    function Addition() {
+        let numberFirst = document.getElementById("sothunhat").value;
+        let numberSecond = document.getElementById("sothuhai").value;
+        let result = parseInt(numberFirst) + parseInt(numberSecond);
+        document.getElementById("result").innerText = "Result Addition: " + result;
+    }
+    function Subtraction() {
+        let numberFirst = document.getElementById("sothunhat").value;
+        let numberSecond = document.getElementById("sothuhai").value;
+        let result = parseInt(numberFirst) - parseInt(numberSecond);
+        document.getElementById("result").innerText = "Result Subtraction: " + result;
+    }
+    function Multiplication() {
+        let numberFirst = document.getElementById("sothunhat").value;
+        let numberSecond = document.getElementById("sothuhai").value;
+        let result = parseInt(numberFirst) * parseInt(numberSecond);
+        document.getElementById("result").innerText = "Result Multiplication: " + result;
+    }
+    function Division() {
+        let numberFirst = document.getElementById("sothunhat").value;
+        let numberSecond = document.getElementById("sothuhai").value;
+        let result = parseInt(numberFirst) / parseInt(numberSecond);
+        document.getElementById("result").innerText = "Result Divion: " + result;
+    }
+</script>
+</body>
+</html>
