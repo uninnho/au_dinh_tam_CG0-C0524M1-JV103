@@ -7,19 +7,34 @@
 <body>
 <h1 id="output"></h1>
 <form>
-  <button type="button" onclick="repeat1()" value="1" id="button1">1</button>
-  <button type="button" onclick="repeat2()" value="1" id="button2">+</button>
+  <button type="button" onclick="input(1)" value="1" id="button1">1</button>
+  <button type="button" onclick="input(2)" value="1" id="button2">+</button>
 </form>
 <script>
-   function repeat1()
-   {
-       let a = document.getElementById("output").innerHTML;
-       document.getElementById("output").innerText = a + document.getElementById("button1").value;
-   }
-   function repeat2()
-   {
-       document.getElementById("output").innerHTML = "";
-       document.getElementById("output").innerText = +document.getElementById("output").innerHTML;
+   // function repeat1()
+   // {
+   //     let a = document.getElementById("output").innerHTML;
+   //     document.getElementById("output").innerText = a + document.getElementById("button1").value;
+   // }
+   // function repeat2()
+   // {
+   //     document.getElementById("output").innerHTML = "";
+   //     document.getElementById("output").innerText = +document.getElementById("output").innerHTML;
+   // }
+   function input(kitu) {
+       document.getElementById()
+       let point = +prompt("nhap diem: ");
+       if(point >= 75) {
+           alert("pass Module");
+       } else if (point >= 60 && point < 70){
+           alert("xem xet");
+       } else if (point >= 40 && point < 60){
+           alert("phu thuoc qua trinh hoc");
+       }
+       else
+       {
+           alert("fail");
+       }
    }
 </script>
 </body>

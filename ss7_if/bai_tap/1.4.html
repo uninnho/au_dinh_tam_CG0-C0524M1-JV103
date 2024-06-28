@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let input1 = +prompt("nhap so thu 1: ");
+    let input2 = +prompt("nhap so thu 2: ");
+    let input3 = +prompt("nhap so thu 3: ");
+    let max = input1;
+
+    if (max < input2) {
+        max = input2;
+        if (max < input3) {
+            max = input3;
+        }
+    } else {
+        if (max < input3) {
+            max = input3;
+        }
+    }
+    alert(max);
+
+    if (input1 > input2 && input1 > input2) {
+        alert("a lon nhat");
+    } else if (input2 > input3) {
+        alert("b lon nhat");
+    } else {
+        alert("c lon nhat");
+    }
+</script>
+</body>
+</html>

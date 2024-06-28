@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let n = +prompt("nhap so n: ");
+    let  count = 0;
+    for (let i = 2; i <= 100; i++)
+    {
+        let isSNT = 1;
+        for (let j = 2; j < i; j++)
+        {
+           if (i % j === 0)
+           {
+               isSNT = 0;
+               break;
+           }
+        }
+        if (isSNT === 0)
+        {
+            isSNT === 1;
+        }
+        else
+        {
+            count++;
+            document.write(i + "<br>");
+        }
+    }
+</script>
+</body>
+</html>

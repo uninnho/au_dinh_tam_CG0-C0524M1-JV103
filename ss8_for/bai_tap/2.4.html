@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+let enable = 1;
+    for (let i = 0; i <= 7; i++) {
+        document.write("*");
+        if (i === 7) {
+            enable = 1;
+        }
+        if (enable) {
+            for (let j = 0; j < 19; j++) {
+                document.write("*");
+                enable = 0;
+            }
+        } else {
+            for (let j = 0; j < 19; j++) {
+                document.write("&nbsp&nbsp");
+            }
+        }
+        document.write("*");
+        document.write("<br>");
+    }
+</script>
+</body>
+</html>

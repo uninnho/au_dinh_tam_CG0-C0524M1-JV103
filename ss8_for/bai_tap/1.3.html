@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let fib0 = 0;
+    let fib1 = 1;
+    let temp = 0;
+    document.write(fib0 + "<br>");
+    document.write(fib1 + "<br>");
+    for (let i = 0; i < 18; i++) {
+        temp = fib1;
+        fib1 = fib0 + fib1;
+        document.write(fib1 + "<br>");
+        fib0 = temp;
+    }
+</script>
+</body>
+</html>

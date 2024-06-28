@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <input type = "text" id = "inputA">
+    <input type = "text" id = "inputB">
+    <button type="button" onclick="tinhtoan()"> Tinh toan</button>
+</form>
+<script>
+    let heSoAinput = document.getElementById("inputA");
+    let heSoBinput = document.getElementById("inputB");
+    // let A = +prompt("a");
+    // let B = +prompt("b");
+
+    function tinhtoan() {
+        let heSoA = +heSoAinput.value;
+        let heSoB = +heSoBinput.value;
+
+        if (heSoA === 0) {
+            if (heSoB === 0) {
+                document.write("phuong trinh vo so nghiem");
+            } else {
+                document.write("phuong trinh vo nghiem");
+            }
+        } else {
+            let x = -heSoB / heSoA;
+            document.write("phuong trinh co nghiem la " + x);
+        }
+    }
+
+</script>
+</body>
+</html>

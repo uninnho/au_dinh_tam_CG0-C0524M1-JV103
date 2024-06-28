@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id = "table"></p>
+<script>
+    let tableString = `<table border="1">`
+           for (let i = 2; i <= 9; i++) {
+               tableString += `<tr>`;
+               for (let j = 1; j <= 9; j++) {
+                   tableString += `<td>${i} x ${j} = ${i * j}</td>`;
+               }
+               tableString += `</tr>`;
+           }
+        tableString += `</<table>`
+    document.getElementById("table").innerHTML = tableString;
+</script>
+</body>
+</html>

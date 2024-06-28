@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let diemKT = +prompt("nhap diem kiem tra ");
+    let diemgGK = +prompt("nhap diem giua ki: ");
+    let diemCK = +prompt("nhap diem cuoi ki: ");
+    let diemTB = (diemCK + diemKT + diemgGK) / 3;
+
+    if (diemTB >= 8) {
+        alert("gioi");
+    } else  if (diemTB >= 6) {
+        alert("kha");
+    } else if (diemTB >=4 ) {
+        alert("trung binh");
+    } else {
+        alert("kem");
+    }
+</script>
+</body>
+</html>
