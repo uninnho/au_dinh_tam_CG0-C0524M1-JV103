@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let danhSachNgoiSao = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
+    let danhSachChomSao = ["Ursa Minor", "Tarurus", "Cygnus", "Lyra", "Aquila", "Ursa Major", "Leo"]
+
+    function timNgoiSao(ngoiSao) {
+        for (let i = 0; i < danhSachChomSao.length; i++){
+            if (ngoiSao === danhSachNgoiSao[i]) {
+                return danhSachChomSao[i];
+            }
+        }
+        return "khong tim thay";
+    }
+
+    alert(timNgoiSao("Polaris"));
+</script>
+</body>
+</html>

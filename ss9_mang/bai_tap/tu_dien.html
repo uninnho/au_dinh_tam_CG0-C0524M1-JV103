@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="txtValue">
+<button type="button" id="btnFind" onclick="Find()">Find</button>
+<p id="result"></p>
+<script>
+    let dictionaryEnglish = ["execute", "boundary", "accomplish", "pattern", "get through"];
+    let dictionaryViet = ["hành hình", "ranh giới", "hoàn thành", "mô hình", "vượt qua"];
+
+    function Find() {
+        let word = document.getElementById("txtValue").value;
+        let find = 0;
+        for (let i = 0; i < dictionaryEnglish.length; i++) {
+            if (dictionaryEnglish[i] === word) {
+                document.getElementById("result").innerText = dictionaryViet[i];
+                find = 1;
+                // console.log(word);
+                break;
+            }
+        }
+        if (!find) {
+            document.getElementById("result").innerText = "not Find";
+            console.log(word);
+            find = 0;
+        }
+
+    }
+
+</script>
+</body>
+</html>

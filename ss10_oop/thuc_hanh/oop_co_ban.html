@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Person = {
+        name : {
+            first : "Bob",
+            last : "Smith"
+    },
+        age : 5,
+        gender : 'female',
+        bio : function () {
+            alert(this.name.first+ " " + this.name.last + " is " + this.age + " years old ");
+        },
+
+        greeting : function () {
+            alert('Hi! I\'m ' + this.name[0]);
+        }
+    };
+
+    Person.age = 10;
+    Person.bio();
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Add new product</h3>
+<input type="text" placeholder="New product" id="productName"><button type="button" onclick="addNewProduct()">Add</button>
+<button type="button" onclick="editProduct()">Update</button>
+<h3>Display all product</h3>
+<table>
+    <thead>
+    <tr>
+        <th>
+            Product name
+        </th>
+        <th></th>
+        <th></th>
+        <th id="total"></th>
+    </tr>
+    </thead>
+    <tbody id="body">
+
+    </tbody>
+</table>
+<script>
+    let arrProduct = ["Iphone 11", "Iphone 12", "Iphone 12 Pro Max"];
+    let index = -1;
+
+    function displayProductList(arrProduct) {
+        let str = "";
+        for (let i = 0; i < arrProduct.length; i ++) {
+            str += `<tr>
+                       <td>${arrProduct[i]}</td>
+                       <td><button onclick="getInfo(${i})">Edit</button></td>
+                       <td><button>Delete</button></td>
+                    </tr>`
+        }
+        document.getElementById("body").innerHTML = str;
+        document.getElementById("total").innerText = arrProduct.length + " products";
+    }
+    function addNewProduct() {
+        arrProduct.push(document.getElementById("productName").value);
+        document.getElementById("productName").value = "";
+        displayProductList(arrProduct);
+        alert("Add new successfully");
+    }
+    function getInfo(i) {
+        document.getElementById("productName").value = arrProduct[i];
+        index = i;
+    }
+
+    function editProduct() {
+        let editProduct = document.getElementById("productName").value;
+        arrProduct[index] = editProduct;
+        displayProductList(arrProduct);
+    }
+    // function editProduct() {
+    //     document.getElementById("productName").value = arrProduct[i];
+    //     if (document.getElementById("productName").value !== arrProduct[i]) {
+    //         addNewProduct();
+    //     }
+    //     arrProduct[i] = arrProduct[arrProduct.length - 1];
+    //     arrProduct.splice(arrProduct.length - 1, 1);
+    // }
+
+    displayProductList(arrProduct);
+</script>
+</body>
+</html>

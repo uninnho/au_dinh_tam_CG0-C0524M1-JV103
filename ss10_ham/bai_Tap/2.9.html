@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let array = ["a", "2", "6", "a"];
+
+    function find(arr, character) {
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (character === arr[i]) {
+                count++;
+            }
+        }
+        if (count === 0) {
+            return -1;
+        }
+        else
+        {
+            return count;
+        }
+    }
+
+    alert(find(array, "a"));
+</script>
+</body>
+</html>

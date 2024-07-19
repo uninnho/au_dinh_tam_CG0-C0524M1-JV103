@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="800"></canvas>
+<script>
+    ///khai bao bien
+    //bien mac dinh
+    const row = 20;
+    const column = 10;
+    const color = "white";
+    const square = 40;
+    const T = [
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [0, 1, 0]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 0],
+            [0, 1, 0]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 1],
+            [0, 1, 0]
+        ]
+    ];
+    const  I = [
+        [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0]
+        ],
+        [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0]
+        ],
+        [
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0]
+        ]
+    ];
+    const  L = [
+        [
+            [0, 0, 1],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 1]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [1, 0, 0]
+        ],
+        [
+            [1, 1, 0],
+            [0, 1, 0],
+            [0, 1, 0]
+        ]
+    ];
+    const  J = [
+        [
+            [1, 0, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 1],
+            [0, 1, 0],
+            [0, 1, 0]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [0, 0, 1]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 0],
+            [1, 1, 0]
+        ]
+    ];
+    const  O = [
+        [
+            [1, 1, 0],
+            [1, 1, 0],
+            [0, 0, 0]
+        ]
+    ];
+    const  S = [
+        [
+            [0, 1, 1],
+            [1, 1, 0],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 1],
+            [0, 0, 1]
+        ],
+        [
+            [0, 0, 0],
+            [0, 1, 1],
+            [1, 1, 0]
+        ],
+        [
+            [1, 0, 0],
+            [1, 1, 0],
+            [0, 1, 0]
+        ]
+    ];
+    const  Z = [
+        [
+            [1, 1, 0],
+            [0, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 0, 1],
+            [0, 1, 1],
+            [0, 1, 0]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 0],
+            [0, 1, 1]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 0],
+            [1, 0, 0]
+        ]
+    ];
+    const Pieces = [
+        [T,"#F28076"],
+        [I,"#FFD66D"],
+        [L,"#FBA2D0"],
+        [J,"#92B9E3"],
+        [O,"#FBC193"],
+        [S,"#4EB09B"],
+        [Z,"#FF9B9B"]
+    ];
+
+    //bien canvas
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    //bien boardGame
+    let boardGame = [];
+
+
+    /// CLASS
+    class Piece {
+        constructor(tetromino, colorOfTetromino) {
+            this.tetromino = tetromino;
+            this.colorOfTetromino = colorOfTetromino;
+
+            this.tetrominoN = 0;
+            this.currentTetromino = this.tetromino[this.tetrominoN];
+
+            this.initialCoordinateCollumn = 3;
+            this.intialCoordinateRow = -2;
+        }
+
+        paint(color) {
+            for (let r = 0; r < this.currentTetromino.length; r++) {
+                for (let c = 0; c < this.currentTetromino[r].length; c++) {
+                    if (this.currentTetromino[r][c]) {
+                        drawSquare(this.intialCoordinateRow + r, this.initialCoordinateCollumn + c, color);
+                    }
+                }
+            }
+        }
+        draw() {
+            this.paint(this.colorOfTetromino);
+            console.log("thuc hien");
+        }
+        unDraw() {
+            this.paint(color);
+        }
+        moveDown() {
+            if (!this.collision(0, 0, 1)) {
+                this.unDraw();
+                this.intialCoordinateRow++;
+                this.draw();
+            } else {
+                this.lock();
+                for (let r = 0; r < row; r++) {
+                    for (let c = 0; c < column; c++) {
+                        console.log(`${r} va ${c} co gia tri ${boardGame[r][c]}`);
+                    }
+                }
+                rdmPiece = randomPiece();
+            }
+        }
+        moveRight() {
+            if (!this.collision(0, 1, 0)) {
+                this.unDraw();
+                this.initialCoordinateCollumn++;
+                this.draw();
+            }
+        }
+        moveLeft() {
+            if (!this.collision(1, 0, 0)) {
+                this.unDraw();
+                this.initialCoordinateCollumn--;
+                this.draw();
+            }
+        }
+        collision(moveLeft, moveRight, moveDown) {
+            for (let r = 0; r < this.currentTetromino.length; r++) {
+                for (let c = 0; c < this.currentTetromino[r].length; c++) {
+                    console.log(this.intialCoordinateRow + r);
+                    if (this.currentTetromino[r][c]) {
+                        if ((this.initialCoordinateCollumn + c - moveLeft) < 0) {
+                            return true;
+                        } else if (this.initialCoordinateCollumn + c + 1 + moveRight > column) {
+                            return true;
+                        } else if (this.intialCoordinateRow + r + 1 + moveDown > row) {
+                            return  true;
+                        }
+                    }
+
+                }
+            }
+            return false;
+        }
+        lock() {
+            for (let r = 0; r < this.currentTetromino.length; r++) {
+                for (let c = 0; c < this.currentTetromino[r].length; c++) {
+                    if (this.currentTetromino[r][c] === 0) {
+                        continue;
+                    }
+                    boardGame[this.intialCoordinateRow + r][this.initialCoordinateCollumn + c] = this.colorOfTetromino;
+                }
+            }
+        }
+    }
+
+    ///ham
+    //ham tao ban game
+    function createBoardGame() {
+        for (let r = 0; r < row; r++) {
+            boardGame[r] = [];
+            for (let c = 0; c < column; c++) {
+                boardGame[r][c] = color;
+            }
+        }
+    }
+    function drawSquare(x, y, choiceColor) {
+        ctx.fillStyle = choiceColor;
+        ctx.fillRect(y * square, x * square, square, square);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(y * square, x * square, square, square);
+    }
+    function drawBoardGame() {
+        for (let r = 0; r < row; r++) {
+            for (let c = 0; c < column; c++) {
+                drawSquare(r, c, boardGame[r][c]);
+            }
+        }
+    }
+    function randomPiece() {
+        let r = Math.floor(Math.random() * Pieces.length);
+        return new Piece(Pieces[r][0], Pieces[r][1]);
+    }
+    let rdmPiece = randomPiece();
+    let gameOver = false;
+    function drop() {
+        setInterval(function () {
+            if (!gameOver) {
+                rdmPiece.moveDown();
+            } else {
+                clearInterval();
+            }
+        }, 1000);
+    }
+
+    ///goi ham
+    createBoardGame();
+    drawBoardGame();
+    drop();
+    document.addEventListener("keydown", occur => {
+        if (occur.key.startsWith("Arrow")) {
+            switch (occur.key) {
+                case "ArrowUp" :
+                    break;
+                case "ArrowDown" :
+                    rdmPiece.moveDown();
+                    break;
+                case "ArrowLeft" :
+                    rdmPiece.moveLeft();
+                    break;
+                case "ArrowRight" :
+                    rdmPiece.moveRight();
+                    break;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

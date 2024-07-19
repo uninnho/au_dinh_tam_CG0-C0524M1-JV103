@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="600" style="border:1px solid black"></canvas>
+<!--<canvas id="canvas" style="border:1px solid black"></canvas>-->
+<script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    const row = 15;
+    const column = 10;
+    const square = 40;
+    const color = "white";
+
+    function drawSquare(x,y,color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x * square,y * square, square, square);
+        ctx.strokeStyle = "BLACK";
+        ctx.strokeRect(x * square,y * square, square, square);
+    }
+
+    let board = [];
+    function createBoard() {
+        for (let i = 0; i < row; i++) {
+            board[i] = [];
+            for (let j = 0; j < column; j++) {
+                board[i][j] = "white";
+            }
+        }
+    }
+    createBoard();
+    function drawBoard() {
+        for (let i = 0; i < row; i++) {
+            for (let j = 0; j < column; j++) {
+                drawSquare(j,i,board[i][j]);
+            }
+        }
+    }
+
+    drawBoard();
+    // ctx.fillStyle = "RED";
+    // ctx.fillRect(50,0,50,50);
+////////////////////////////////////////////////////////////////////////
+    const T = [
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [0, 1, 0]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 0],
+            [0, 1, 0]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 1],
+            [0, 1, 0]
+        ]
+    ];
+    const  I = [
+        [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0]
+        ],
+        [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0]
+        ],
+        [
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0]
+        ]
+    ];
+    const  L = [
+        [
+            [0, 0, 1],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 1]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [1, 0, 0]
+        ],
+        [
+            [1, 1, 0],
+            [0, 1, 0],
+            [0, 1, 0]
+        ]
+    ];
+    const  J = [
+        [
+            [1, 0, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 1],
+            [0, 1, 0],
+            [0, 1, 0]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 1],
+            [0, 0, 1]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 0],
+            [1, 1, 0]
+        ]
+    ];
+    const  O = [
+        [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0]
+        ]
+    ];
+    const  S = [
+        [
+            [0, 1, 1],
+            [1, 1, 0],
+            [0, 0, 0]
+        ],
+        [
+            [0, 1, 0],
+            [0, 1, 1],
+            [0, 0, 1]
+        ],
+        [
+            [0, 0, 0],
+            [0, 1, 1],
+            [1, 1, 0]
+        ],
+        [
+            [1, 0, 0],
+            [1, 1, 0],
+            [0, 1, 0]
+        ]
+    ];
+    const  Z = [
+        [
+            [1, 1, 0],
+            [0, 1, 1],
+            [0, 0, 0]
+        ],
+        [
+            [0, 0, 1],
+            [0, 1, 1],
+            [0, 1, 0]
+        ],
+        [
+            [0, 0, 0],
+            [1, 1, 0],
+            [0, 1, 1]
+        ],
+        [
+            [0, 1, 0],
+            [1, 1, 0],
+            [1, 0, 0]
+        ]
+    ];
+    const Pieces = [
+        [T,"#F28076"],
+        [I,"#FFD66D"],
+        [L,"#FFB6AF"],
+        [J,"#FAE0C7"],
+        [O,"#FBC193"],
+        [S,"#4EB09B"],
+        [Z,"#FF9B9B"]
+    ];
+    class Piece {
+        constructor(tetromino, color) {
+            this.tetromino = tetromino;
+            this.color = color;
+
+            this.tetrominoN = 0;
+            this.activeTetromino = this.tetromino[this.tetrominoN];
+
+            this.x = 3;
+            this.y = -2;
+        }
+
+        fill(color){
+            for (let i = 0; i < this.activeTetromino.length; i++){
+                for (let j = 0; j < this.activeTetromino[i].length; j++) {
+                    if (this.activeTetromino[i][j]) {
+                        drawSquare(this.x + j, this.y + i, color);
+                    }
+
+                }
+            }
+        }
+
+        draw() {
+            this.fill(this.color);
+        }
+        unDraw() {
+            this.fill(color);
+        }
+        moveDown() {
+            if (!this.collision(0, 1, this.activeTetromino)) {
+                this.unDraw();
+                this.y++;
+                this.draw();
+            } else {
+                this.lock();
+                p = randomPiece();
+            }
+        }
+        moveLeft() {
+            if (!this.collision(-1, 0, this.activeTetromino)) {
+                this.unDraw();
+                this.x--;
+                this.draw();
+            }
+        }
+        moveRight() {
+            if (!this.collision(1, 0, this.activeTetromino)) {
+                this.unDraw();
+                this.x++;
+                this.draw();
+            }
+        }
+        collision(x, y, piece) {
+            for (let i = 0; i < piece.length; i++){
+                for (let j = 0; j < piece.length; j++) {
+                    if (!piece[i][j]) {
+                        continue;
+                    }
+                    let collisionX = this.x + j + x;
+                    let collisionY = this.y + i + y;
+                    if (collisionX < 0 || collisionX >= column) {
+                        return true;
+                    }
+                    if (collisionY < 0) {
+                        continue;
+                    }
+                    if (collisionY >= row) {
+                        return true;
+                    }
+                    if (board[collisionY][collisionX] !== "white") {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        lock() {
+            for (let i = 0; i < this.activeTetromino.length; i++){
+                for (let j = 0; j < this.activeTetromino.length; j++) {
+                    if (!this.activeTetromino[i][j]) {
+                        continue;
+                    }
+                    if ((this.y + i) < 0) {
+                        alert("Game over");
+                        break;
+                    }
+                    board[this.y + i][this.x + j] = this.color;
+                }
+            }
+
+            for (let i = 0; i < row; i++) {
+                let isFull = true;
+                for (let j = 0; j < column; j++) {
+                    isFull = isFull && (board[i][j] !== color);
+                }
+                if (isFull) {
+                    for (let y = i; y > 1; y--) {
+                        for (let j = 0; j < column; j++) {
+                            board[y][j] = board[y - 1][j];
+                        }
+                    }
+
+                    for (let j = 0; j < column; j++) {
+                        board[0][j] = color;
+                    }
+                }
+            }
+            drawBoard();
+        }
+        rotate() {
+            this.unDraw();
+            this.tetrominoN++;
+
+            if (this.tetrominoN >= this.tetromino.length) {
+                this.tetrominoN = 0;
+            }
+            this.activeTetromino = this.tetromino[this.tetrominoN];
+            if (this.collision(0, 0,this.activeTetromino)) {
+                if (this.x > column / 2) {
+                    this.x -= 2;
+                } else {
+                    this.x += 2;
+                }
+            }
+
+            this.draw();
+        }
+    }
+    function randomPiece() {
+        let r = Math.floor(Math.random() * Pieces.length);
+        return new Piece(Pieces[r][0], Pieces[r][1]);
+
+    }
+
+    let p = randomPiece();
+    console.log(p);
+
+    let gameOver = false;
+    function drop() {
+        setInterval(function() {
+            if (!gameOver) {
+                p.moveDown();
+            } else {
+                clearInterval();
+            }
+        },1000);
+
+    }
+    // document.addEventListener('keydown', function (e) {
+    //     if (e.keyCode === 37) {
+    //         p.moveLeft();
+    //     } else if (e.key === '39') {
+    //         p.moveRight();
+    //     } else if (e.key === "40") {
+    //
+    //     } else if (e.key === "38") {
+    //         p.moveDown();
+    //     }
+    // })
+    document.addEventListener('keydown', event => {
+        if (event.key.startsWith("Arrow")) {
+            switch (event.key) {
+                case "ArrowUp" :
+                    p.rotate();
+                    break;
+                case "ArrowLeft" :
+                    p.moveLeft();
+                    break;
+                case "ArrowRight" :
+                    p.moveRight();
+                    break;
+                case "ArrowDown" :
+                    p.moveDown();
+                    break;
+
+            }
+        }
+    })
+    drop();
+</script>
+</body>
+</html>

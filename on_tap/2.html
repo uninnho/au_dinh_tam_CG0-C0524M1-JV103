@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function checkTriangle(x,y,z) {
+        //kiểm tra 3 cạnh có phải cạnh của tam giác không
+        //x,y,z > 0 x +y > z, x + z > y, y+z >x
+        //kiểm tra tam giác vuông pytago x^2 = y^2 + z^2
+        let isNotTriangle = (x <= 0 || y <= 0 || z <= 0 || x + y < z || x + z < y || y + z < x);
+        
+        if (isNotTriangle) {
+            alert("khong la tam giac")
+        } else if (x * x == y * y + z * z || y * y == x * x + z * z || z * z == y * y + x * x) {
+            alert("tam giac vuong");
+        } else {
+            alert("tam giac thuong");
+        }
+    }
+</script>
+</body>
+</html>

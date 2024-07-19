@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr = [1,10,12,52,0,3,8,9,4,10];
+
+    // let arr = [];
+    //
+    // for (let i = 0; i < 10; i++) {
+    //     arr[i] = +prompt(`nhap phan tu thu ${i} `);
+    // }
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i; j < arr.length; j++) {
+            if (arr[i] < arr[j]) {
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    document.write(arr);
+</script>
+</body>
+</html>
