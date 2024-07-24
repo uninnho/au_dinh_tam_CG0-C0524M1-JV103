@@ -110,6 +110,21 @@
             [1, 1, 0],
             [1, 1, 0],
             [0, 0, 0]
+        ],
+        [
+            [1, 1, 0],
+            [1, 1, 0],
+            [0, 0, 0]
+        ],
+        [
+            [1, 1, 0],
+            [1, 1, 0],
+            [0, 0, 0]
+        ],
+        [
+            [1, 1, 0],
+            [1, 1, 0],
+            [0, 0, 0]
         ]
     ];
     const  S = [
@@ -203,64 +218,126 @@
             this.paint(color);
         }
         moveDown() {
-            if (!this.collision(0, 0, 1)) {
+            if (!this.collision(0, 0, 1, this.currentTetromino)) {
                 this.unDraw();
                 this.initialCoordinateRow++;
-                this.draw(this.initialCoordinateRow);
+                this.draw();
             } else {
                 this.lock();
-                console.log(this.initialCoordinateRow);
-                console.log(this.initialCoordinateCollumn);
-                console.log(boardGame[this.initialCoordinateRow + 1][this.initialCoordinateCollumn + 1]);
-                for (let r = 0; r < row; r++) {
-                    for (let c = 0; c < column; c++) {
-                        console.log(`${r} va ${c} co gia tri ${boardGame[r][c]}`);
-                    }
-                }
+                // console.log(this.initialCoordinateRow);
+                // console.log(this.initialCoordinateCollumn);
+                // console.log(boardGame[this.initialCoordinateRow + 1][this.initialCoordinateCollumn + 1]);
+                // for (let r = 0; r < row; r++) {
+                //     for (let c = 0; c < column; c++) {
+                //         console.log(`${r} va ${c} co gia tri ${boardGame[r][c]}`);
+                //     }
+                // }
                 rdmPiece = randomPiece();
             }
         }
         moveRight() {
-            if (!this.collision(0, 1, 0)) {
-                this.unDraw();
-                this.initialCoordinateCollumn++;
-                this.draw();
+            if (!this.collision(0, 1, 0, this.currentTetromino)) {
+                    this.unDraw();
+                    this.initialCoordinateCollumn++;
+                    this.draw();
             }
         }
         moveLeft() {
-            if (!this.collision(1, 0, 0)) {
+            if (!this.collision(1, 0, 0, this.currentTetromino)) {
                 this.unDraw();
                 this.initialCoordinateCollumn--;
                 this.draw();
             }
         }
-        collision(moveLeft, moveRight, moveDown) {
-            for (let r = 0; r < this.currentTetromino.length; r++) {
-                for (let c = 0; c < this.currentTetromino[r].length; c++) {
-                    if (this.currentTetromino[r][c]) {
+        collision(moveLeft, moveRight, moveDown, piece) {
+            for (let r = 0; r < piece.length; r++) {
+                for (let c = 0; c < piece[r].length; c++) {
+                    // console.log(`cot la ${this.initialCoordinateCollumn + c}`);
+                    // console.log(`hang la ${this.initialCoordinateRow + r}`);
+                    if (piece[r][c]) {
                         if ((this.initialCoordinateCollumn + c - moveLeft) < 0) {
                             return true;
                         } else if (this.initialCoordinateCollumn + c + 1 + moveRight > column) {
                             return true;
                         } else if (this.initialCoordinateRow + r + 1 + moveDown > row) {
                             return  true;
-                        } //else if (boardGame[this.initialCoordinateRow + r][this.initialCoordinateCollumn + c] !== "white") {
-                          //  return true;
-                      //  }
+                        } else if (this.initialCoordinateRow >= 0) {
+                            if (boardGame[this.initialCoordinateRow + r + 1][this.initialCoordinateCollumn + c] !== "white") {
+                                return true;
+                            }
+                            if (moveRight === 1) {
+                                console.log(`moveRight ${moveRight}`);
+                                if (boardGame[this.initialCoordinateRow + r][this.initialCoordinateCollumn + c + 1] !== "white") {
+                                    return true;
+                                }
+                            }
+                            if (moveLeft === 1) {
+                                console.log(`moveRight ${moveRight}`);
+                                if (boardGame[this.initialCoordinateRow + r][this.initialCoordinateCollumn + c - 1] !== "white") {
+                                    return true;
+                                }
+                            }
+                        }
                     }
                 }
             }
             return false;
         }
+
         lock() {
             for (let r = 0; r < this.currentTetromino.length; r++) {
                 for (let c = 0; c < this.currentTetromino[r].length; c++) {
                     if (this.currentTetromino[r][c] === 0) {
                         continue;
                     }
+                    if ((this.initialCoordinateRow  + r) < 0) {
+                        alert("Game over");
+                        break;
+                    }
                     boardGame[this.initialCoordinateRow + r][this.initialCoordinateCollumn + c] = this.colorOfTetromino;
                 }
             }
+
+            for (let r = 0; r < row; r++) {
+                let isFull = true;
+                for (let c = 0; c < column; c++) {
+                    isFull = isFull && (boardGame[r][c] !== color);
+                }
+
+                if (isFull) {
+                    for (let i = r; i > 1; i--) {
+                        for (let c = 0; c < column; c++) {
+                            boardGame[i][c] = boardGame[i - 1][c];
+                        }
+                    }
+
+                    for (let c = 0; c < column; c++) {
+                        boardGame[0][c] = color;
+                    }
+                }
+            }
+            drawBoardGame();
+        }
+        rotate() {
+            let move = 0;
+
+            let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
+            if (this.collision(0,0,0, nextPattern)) {
+                if (this.initialCoordinateCollumn > column / 2) {
+                    move -= 2;
+                } else {
+                    move += 2;
+                }
+            }
+            this.tetrominoN++;
+                this.unDraw();
+                this.initialCoordinateCollumn += move;
+                if (this.tetrominoN === 4) {
+                    this.tetrominoN = 0;
+                }
+                this.currentTetromino = this.tetromino[this.tetrominoN];
+                this.draw();
+
         }
     }
 
@@ -311,6 +388,7 @@
         if (occur.key.startsWith("Arrow")) {
             switch (occur.key) {
                 case "ArrowUp" :
+                    rdmPiece.rotate();
                     break;
                 case "ArrowDown" :
                     rdmPiece.moveDown();
