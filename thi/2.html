@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function checkUpCase(temp) {
+        let count = 0;
+        let tempLowerCase = temp.toLowerCase(temp);
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i] !== tempLowerCase[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // let str = "abcdEFABC";
+    let str = "abcd";
+    if (checkUpCase(str) > 0) {
+        alert("So luong in hoa la: " + checkUpCase(str));
+    } else {
+        alert("The Strings is not contain upper char")
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Phone {
+        constructor(phoneId, phoneName, phoneCompany, phonePrice) {
+            this.phoneId = phoneId;
+            this.phoneName = phoneName;
+            this.phoneCompany = phoneCompany;
+            this.phonePrice = phonePrice;
+        }
+
+        getId() {
+            return this.phoneId;
+        }
+        getName() {
+            return this.phoneName;
+        }
+        getCompany() {
+            return this.phoneCompany;
+        }
+        getPrice() {
+            return this.phonePrice;
+        }
+        setId(id) {
+            this.phoneId = id;
+        }
+        setName(name) {
+            this.phoneName = name;
+        }
+        setCompany(company) {
+            this.phoneCompany = company;
+        }
+        setPrice(price) {
+            this.phonePrice = price;
+        }
+        getCharacterFirst() {
+            return this.phoneName[0];
+        }
+    }
+
+    let phone1 = new Phone(1, "iphoneX", "apple", "2000");
+    let phone2 = new Phone(2, "note 23", "samsung", "2500");
+    let phone3 = new Phone(3, "mi 13", "xioami", "1800");
+    let arr = [phone1, phone2, phone3];
+    for (let i = 0; i < arr.length; i++) {
+        document.write(arr[i].phoneId + " " + arr[i].phoneName + " " + arr[i].phoneCompany + " " + arr[i].phonePrice + "<br>");
+    }
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i; j < arr.length; j++) {
+            // if (arr[i].getCharacterFirst() > arr[j].getCharacterFirst()) {
+            //     let temp = arr[i];
+            //     arr[i] = arr[j];
+            //     arr[j] = temp;
+            // }
+            arr.sort(function(arr[i].getCharacterFirst(), arr[j].getCharacterFirst()) {
+                return arr[i].getCharacterFirst - arr[j].getCharacterFirst()
+            });
+        }
+    }
+    alert(arr);
+    // document.write(arr.sort(arr[0].getCharacterFirst, arr[1].getCharacterFirst()));
+
+</script>
+</body>
+</html>

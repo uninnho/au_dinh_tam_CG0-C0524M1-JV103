@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr = [1,5,6,23,8,47,10,3];
+    function checkPrime(n) {
+            if (n < 2) {
+                return false;
+            }
+            for (let j = 2; j <= n - 1; j++) {
+                if (n % j === 0) {
+                    return false;
+                }
+            }
+            return true;
+    }
+
+    function arrayPrime(temp) {
+        let index = 0;
+        let arrayPrime = [];
+        for (let i = 0; i < temp.length; i++) {
+            if (checkPrime(temp[i])) {
+                arrayPrime[index] = temp[i];
+                index++;
+            }
+        }
+        return arrayPrime;
+    }
+
+
+    alert(arrayPrime(arr.sort(function(a, b) {
+        return a - b
+    })));
+
+</script>
+</body>
+</html>

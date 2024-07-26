@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let arr = [];
+    let sumOdd = 0;
+    let sumEven = 0;
+    let n;
+    do {
+        n = +prompt("nhap so phan tu: ");
+    } while (n > 20 || n <= 0)
+
+    for (let i = 0; i < n; i++ ) {
+        arr[i] = +prompt(`phan tu thu ${i}: `);
+    }
+
+    for (let i = 0; i < n; i++ ) {
+        document.write(arr[i] + " ");
+    }
+
+    for (let i = 0; i < n; i++ ) {
+        if (arr[i] % 2 === 0) {
+            sumOdd += arr[i];
+        } else {
+            sumEven += arr[i];
+        }
+    }
+
+    let result = sumOdd - sumEven;
+    document.write("tong so chan: " + sumOdd + " ");
+    document.write("tong so le: " +sumEven + " ");
+
+
+    document.write("ket qua: " + result);
+
+</script>
+</body>
+</html>
